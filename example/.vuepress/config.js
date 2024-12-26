@@ -82,14 +82,14 @@ export default defineUserConfig({
         icon: 'IconLanguage',
         children: [
           {
-            text: '是大法师的',
+            text: 'NavbarA',
             children: [
               '/blogs/category1/blog1.md',
               '/blogs/category1/blog2.md',
             ],
           },
           {
-            text: '爽肤水的饭',
+            text: 'NavbarB',
             children: [
               '/blogs/category1/blog1.md',
               '/blogs/category1/blog2.md',
