@@ -143,11 +143,20 @@ const jumpPage = (page) => {
   const p = parseInt(page)
 
   if (p <= tp.value && p > 0) {
+    
     emits('change', p)
     return
+  }else if(p>tp.value){
+    
+    emits('change', tp.value)
+  }else if(p<=0){
+    emits('change',1)
+  }else{
+    emits('change',1)
   }
+  targetPage.value =  null
 
-  alert(`请输入大于0，并且小于等于${tp.value}的页码！`)
+  // alert(`请输入大于0，并且小于等于${tp.value}的页码！`)
 }
 
 const goPrev = () => {

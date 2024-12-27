@@ -71,8 +71,14 @@ import { useThemeLocaleData } from '@composables/index.js';
 import PostList from '@components/PostList/index.vue'
 import Pagation from '../Pagation.vue'
 import { IconFolder, IconTag } from '@components/icons/index.js'
+import { log } from "console";
+import { handlePageAdd } from "vuepress";
 
 const { posts, categorySummary } = useExtendPageData()
+
+const total = computed(()=>{
+  return posts.length
+})
 
 const currentPage = ref(1)
 const perPage = 10
@@ -111,7 +117,22 @@ if (!__VUEPRESS_SSR__) {
     window.scrollTo({ left: 0, top: 0, behavior: 'smooth' })
   }
 
+  const pageNum = Number(route?.query?.page)
+
+  function refreshPage(page){
+    if(page>=total){
+      page=total
+    }else if(page<=0){
+      page=1;
+    }
+    handlePagation(page);
+  }
+
   onMounted(() => {
+    if(typeof pageNum ==='number' && !isNaN(pageNum)){
+      refreshPage(pageNum);
+    }
+
   // @ts-ignore
     watch(queryPage, (newVal) => {
       if (newVal) {
